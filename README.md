@@ -478,4 +478,4 @@ kubectl delete namespace ingress-nginx
 
 ## Related
 
-Full writeup on dev.to: [I Built a Multi-Service Kubernetes App and Here's What Actually Broke](https://dev.to/adil-khan-723/i-built-a-multi-service-kubernetes-app-and-heres-what-actually-broke-4f99)
+Full writeup on dev.to: [I Built a Multi-Service Kubernetes App and Here's What Actually Broke](https://dev.to/adil-khan-723/i-built-a-multi-service-kubernetes-app-and-heres-what-actually-broke-1066)
