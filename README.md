@@ -39,6 +39,9 @@ This mirrors real microservices patterns:
 
 Kubernetes handles orchestration, self-healing, DNS resolution, and load balancing across all components.
 
+## Architecture Diagram
+<img width="2816" height="1536" alt="ingress-tls-gemini" src="https://github.com/user-attachments/assets/89125005-94ee-4103-9d96-997159d2305c" />
+
 ## Architecture Flow
 
 ```
