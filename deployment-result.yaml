@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: result-dep
+  namespace: example
+spec:
+  template:
+    metadata:
+      labels:
+        app: results
+    
+    spec:
+      containers:
+        - name: results
+          image: dockersamples/examplevotingapp_result
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "150Mi"
+            limits:
+              cpu: "500m"
+              memory: "500Mi"
+          
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
+  
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: results
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+      

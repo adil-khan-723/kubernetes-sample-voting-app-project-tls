@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voting-dep
+  namespace: example
+spec:
+  template:
+    metadata:
+      labels:
+        app: voting
+    
+    spec:
+      containers:
+        - name: voting
+          image: dockersamples/examplevotingapp_vote
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "150Mi"
+            limits:
+              cpu: "500m"
+              memory: "500Mi"
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
+  replicas: 1
+  selector:
+    matchLabels:
+      app: voting
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1

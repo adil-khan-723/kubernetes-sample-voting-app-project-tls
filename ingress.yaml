@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: example
+spec:
+  rules:
+    - host: vote.oggy.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: voting-svc
+                port: 
+                  number: 80
+    - host: result.oggy.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: results-svc
+                port:
+                  number: 80
+
+  tls:
+    - hosts:
+        - vote.oggy.local
+        - result.oggy.local
+      secretName: oggy-tls-secret

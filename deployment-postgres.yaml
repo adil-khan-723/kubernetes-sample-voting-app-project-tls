@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-dep
+  namespace: example
+spec:
+  template: 
+    metadata:
+      labels:
+        app: postgres
+    
+    spec:
+      initContainers:
+        - name: db-init
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              echo "export POSTGRES_USER=$(cat /config/DB_USER)" > /work/env
+              echo "export POSTGRES_PASSWORD=$(cat /secrets/DB_PASSWORD)" >> /work/env
+          volumeMounts:
+            - mountPath: /secrets
+              name: secrets-volume
+            - mountPath: /config
+              name: config-volume
+            - mountPath: /work
+              name: work-volume
+      containers:
+        - name: postgres
+          image: postgres:15-alpine
+          ports:
+            - containerPort: 5432
+          command: ["sh", "-c", ". /work/env && docker-entrypoint.sh postgres"]
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "150Mi"
+            limits:
+              cpu: "500m"
+              memory: "500Mi"
+          volumeMounts:
+            - mountPath: /work
+              name: work-volume
+      volumes:
+        - name: secrets-volume
+          secret: 
+            secretName: app-secret
+        - name: work-volume
+          emptyDir: {}
+        - name: config-volume
+          configMap:
+            name: app-config
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
