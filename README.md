@@ -251,18 +251,22 @@ You need to think across all layers simultaneously.
 ```
 .
 ├── README.md
-├── app-config.yaml              # ConfigMap for application settings
-├── app-secrets.yaml             # Secrets for sensitive data
-├── deployment-db.yaml           # PostgreSQL deployment
-├── deployment-redis.yaml        # Redis deployment
-├── deployment-result.yaml       # Results frontend deployment
-├── deployment-voting.yaml       # Voting frontend deployment
-├── deployment-worker.yaml       # Worker service deployment
-├── ingress-rules.yaml          # Ingress configuration with TLS
-├── service-db.yaml             # PostgreSQL service
-├── service-redis.yaml          # Redis service
-├── service-result.yaml         # Results frontend service
-└── service-voting.yaml         # Voting frontend service
+├── namespace.yaml              # Namespace definition
+├── configMap.yaml              # ConfigMap for app configuration
+├── secrets.yaml                # Secrets for sensitive data
+├── tls-secret.yaml            # TLS certificates for HTTPS
+├── oggy.crt                   # TLS certificate file
+├── oggy.key                   # TLS private key file
+├── deployment-postgres.yaml   # PostgreSQL Deployment
+├── deployment-redis.yaml      # Redis Deployment
+├── deployment-result.yaml     # Results Frontend Deployment
+├── deployment-voting.yaml     # Voting Frontend Deployment
+├── deployment-worker.yaml     # Worker Deployment
+├── service-postgres.yaml      # PostgreSQL Service
+├── service-redis.yaml         # Redis Service
+├── service-results.yaml       # Results Service
+├── service-voting.yaml        # Voting Service
+└── ingress.yaml               # Ingress with TLS configuration
 ```
 
 ## Setup Instructions
