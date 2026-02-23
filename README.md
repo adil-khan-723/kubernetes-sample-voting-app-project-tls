@@ -39,6 +39,9 @@ This mirrors real microservices patterns:
 
 Kubernetes handles orchestration, self-healing, DNS resolution, and load balancing across all components.
 
+## Architecture Diagram
+<img width="2816" height="1536" alt="ingress-tls-gemini" src="https://github.com/user-attachments/assets/89125005-94ee-4103-9d96-997159d2305c" />
+
 ## Architecture Flow
 
 ```
@@ -251,18 +254,22 @@ You need to think across all layers simultaneously.
 ```
 .
 ├── README.md
-├── app-config.yaml              # ConfigMap for application settings
-├── app-secrets.yaml             # Secrets for sensitive data
-├── deployment-db.yaml           # PostgreSQL deployment
-├── deployment-redis.yaml        # Redis deployment
-├── deployment-result.yaml       # Results frontend deployment
-├── deployment-voting.yaml       # Voting frontend deployment
-├── deployment-worker.yaml       # Worker service deployment
-├── ingress-rules.yaml          # Ingress configuration with TLS
-├── service-db.yaml             # PostgreSQL service
-├── service-redis.yaml          # Redis service
-├── service-result.yaml         # Results frontend service
-└── service-voting.yaml         # Voting frontend service
+├── namespace.yaml              # Namespace definition
+├── configMap.yaml              # ConfigMap for app configuration
+├── secrets.yaml                # Secrets for sensitive data
+├── tls-secret.yaml            # TLS certificates for HTTPS
+├── oggy.crt                   # TLS certificate file
+├── oggy.key                   # TLS private key file
+├── deployment-postgres.yaml   # PostgreSQL Deployment
+├── deployment-redis.yaml      # Redis Deployment
+├── deployment-result.yaml     # Results Frontend Deployment
+├── deployment-voting.yaml     # Voting Frontend Deployment
+├── deployment-worker.yaml     # Worker Deployment
+├── service-postgres.yaml      # PostgreSQL Service
+├── service-redis.yaml         # Redis Service
+├── service-results.yaml       # Results Service
+├── service-voting.yaml        # Voting Service
+└── ingress.yaml               # Ingress with TLS configuration
 ```
 
 ## Setup Instructions
@@ -471,4 +478,4 @@ kubectl delete namespace ingress-nginx
 
 ## Related
 
-Full writeup on dev.to: [I Built a Multi-Service Kubernetes App and Here's What Actually Broke](https://dev.to/adil-khan-723/i-built-a-multi-service-kubernetes-app-and-heres-what-actually-broke-4f99)
+Full writeup on dev.to: [I Built a Multi-Service Kubernetes App and Here's What Actually Broke](https://dev.to/adil-khan-723/i-built-a-multi-service-kubernetes-app-and-heres-what-actually-broke-1066)
