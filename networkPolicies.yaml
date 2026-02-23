@@ -1,0 +1,10 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+matadata:
+  name: deny-all-policy
+  namespace: example
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
