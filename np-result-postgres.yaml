@@ -13,7 +13,7 @@ spec:
     - from:
       - podSelector:
           matchLabels:
-            app: result
+            app: results
       ports:
         - protocol: TCP
           port: 5432
