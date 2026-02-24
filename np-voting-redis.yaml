@@ -15,7 +15,7 @@ spec:
     - from:
       - podSelector:
           matchLabels:
-            app: results
+            app: voting
       ports:
         - protocol: TCP
           port: 6379
