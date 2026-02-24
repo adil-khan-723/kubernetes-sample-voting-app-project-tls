@@ -1,0 +1,21 @@
+# voting > redis
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: 
+  name: voting-redis
+  namespace: example
+spec:
+  podSelector:
+    matchLabels:
+      app: redis
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            app: voting
+      ports:
+        - protocol: TCP
+          port: 6379
